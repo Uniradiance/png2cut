@@ -182,6 +182,7 @@ func padPNGsInDir(targetDir string, saveSubdir string) (int, error) {
 }
 
 func main() {
+	fmt.Printf("图片尺寸对其工具，作者：Uniradiance 邮箱：megatronus@sina.cn")
 	dir := flag.String("dir", ".", "目标目录 (默认 当前目录)")
 	out := flag.String("out", "Texture", "输出子目录名")
 	flag.Parse()
