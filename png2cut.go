@@ -151,22 +151,7 @@ func padPNGsInDir(targetDir string, saveSubdir string) (int, error) {
 
 		outPath := filepath.Join(outDir, fname)
 		if newW == w && newH == h {
-			// 直接复制文件以保持原样（避免重新编码带来的细微变化）
-			// 如果复制失败，再尝试用 png.Encode 写入
-			srcBytes, err := os.ReadFile(srcPath)
-			if err == nil {
-				_ = os.WriteFile(outPath, srcBytes, 0o644)
-				saved++
-				continue
-			}
-			// 回退：重新编码并保存
-			of, err := os.Create(outPath)
-			if err != nil {
-				continue
-			}
-			_ = png.Encode(of, img)
-			of.Close()
-			saved++
+			// 跳过：宽高已是偶数，无需复制或重新编码
 			continue
 		}
 
